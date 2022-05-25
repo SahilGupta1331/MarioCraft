@@ -1,0 +1,96 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://title.png" type="Texture" id=1]
+[ext_resource path="res://Chunk.tscn" type="PackedScene" id=2]
+[ext_resource path="res://strad.ogg" type="AudioStream" id=3]
+[ext_resource path="res://font.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://gui/button3.png" type="Texture" id=5]
+[ext_resource path="res://gui/button2.png" type="Texture" id=6]
+[ext_resource path="res://gui/button1.png" type="Texture" id=7]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+func _on_TextureButton_pressed():
+	get_tree().change_scene(\"res://World.tscn\")
+"
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 200, 20 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 200, 20 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 200, 20 )
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 200, 20 )
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 200, 20 )
+
+[sub_resource type="DynamicFont" id=8]
+extra_spacing_top = 3
+extra_spacing_char = 1
+font_data = ExtResource( 4 )
+
+[node name="Title" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="Chunk" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 112 )
+
+[node name="title" type="Sprite" parent="."]
+position = Vector2( 13.5, 32 )
+scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -15.0
+autoplay = true
+
+[node name="TextureButton" type="Button" parent="."]
+margin_left = 28.0
+margin_top = 156.0
+margin_right = 228.0
+margin_bottom = 176.0
+custom_fonts/font = SubResource( 7 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+anchor_right = 0.779
+margin_left = 89.0
+margin_top = 105.0
+margin_right = 325.0
+margin_bottom = 147.0
+rect_rotation = -21.1387
+rect_scale = Vector2( 0.75, 1 )
+custom_colors/default_color = Color( 1, 1, 0, 1 )
+custom_fonts/normal_font = SubResource( 8 )
+bbcode_enabled = true
+bbcode_text = "[center]Much like creative Minecraft!"
+text = "Much like creative Minecraft!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
